@@ -3,6 +3,32 @@ var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 
+// FireBase setup
+var firebase = require('firebase');
+
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAxylt6M3T3bVfJiXPrpW_n4Cws-6BTf3s",
+    authDomain: "hairguru-159817.firebaseapp.com",
+    databaseURL: "https://hairguru-159817.firebaseio.com",
+    storageBucket: "hairguru-159817.appspot.com",
+    messagingSenderId: "187057722076"
+  };
+  firebase.initializeApp(config);
+
+// Get a reference to the database service
+var database = firebase.database();
+
+function writeUserData(userId, name, email, imageUrl) {
+  database.ref('users/' + userId).set({
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  });
+}
+
+// writeUserData("ram1234", "ram", "ram@uiui.edu");
+
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
